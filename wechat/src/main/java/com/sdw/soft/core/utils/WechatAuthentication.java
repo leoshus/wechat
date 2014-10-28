@@ -2,8 +2,6 @@ package com.sdw.soft.core.utils;
 
 import java.util.Arrays;
 
-import ch.qos.logback.classic.Logger;
-
 /**
  * @author Sonicery_D
  * @date 2014年10月28日
@@ -41,5 +39,11 @@ public class WechatAuthentication {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	public static void main(String[] args) {
+		String signature = "ff6b3bb9fc2e409b9d3e3f2c80bbde7f4c9a784c";
+		String timestamp = "1414509862";
+		String nonce = "1295345138";
+		System.out.println(authenticate(signature, timestamp, nonce));
 	}
 }
