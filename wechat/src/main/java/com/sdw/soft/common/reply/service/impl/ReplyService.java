@@ -44,27 +44,30 @@ public class ReplyService implements IReplyService {
 	 */
 	public String dealReceiveMessage(String requestXml){
 		String msgType = null;
+		requestXml = "<xml><ToUserName><![CDATA[gh_4f3143843422]]></ToUserName><FromUserName><![CDATA[of2Yrt8f2LvQ8bhBttLDg4A045NI]]></FromUserName><CreateTime>1414512271</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[世界新技术]]></Content><MsgId>6075283943937494502</MsgId></xml>";
 		WechatBaseMessage baseMessage = this.fectchWechatMessage(requestXml, new Class[]{WechatBaseMessage.class});
 		msgType = baseMessage.getMsgType();
 		String responseMessage = "响应消息";
 		logger.info("当前微信请求数据类型为:{}",msgType);
 		if(msgType != null){
 			if(msgType.equals(MessageType.MESSAGE_TYPE_TEXT)){//处理文本消息
+				logger.info("dealReceiveMessage---处理文本消息");
 				Object message = assembleReplyMessage(baseMessage,REPLY_MESSAGE_TYPE_TEXT);
 				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,message,new Class[]{WechatTextMessage.class});
 				
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_IMAGE)){//图片消息
-				
+				logger.info("dealReceiveMessage---图片消息");
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_LOCATION)){//地理位置消息
-				
+				logger.info("dealReceiveMessage---地理位置消息");
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_EVENT)){//事件消息
-				
+				logger.info("dealReceiveMessage---事件消息");
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_LINK)){//链接消息
-				
+				logger.info("dealReceiveMessage---链接消息");
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_VOICE)){//语言消息
-				
+				logger.info("dealReceiveMessage---语言消息");
 			}
 		}
+		logger.info("responseMessage finally:{}",responseMessage);
 		return responseMessage;
 	}
 	private String processReplyMessage(String replyMessageType,Object message,Class[] clazz) {
@@ -109,8 +112,9 @@ public class ReplyService implements IReplyService {
 			Map<String,String> resultMap = null;
 			if(MessageType.MESSAGE_TYPE_EVENT.equals(baseMessage.getMsgType())){//事件处理
 				if(MessageType.EVENT_TYPE_CLICK.equals(baseMessage.getEvent().toUpperCase())){//click事件
-					
+					logger.info("click事件");
 				}else if(MessageType.EVENT_TYPE_SUBSCRIBE.equals(baseMessage.getEvent().toUpperCase())){//订阅事件
+					logger.info("订阅事件");
 					if(baseMessage.getEventKey() != null && !baseMessage.getEventKey().equals("")){//二维码扫描
 						logger.info("二维码扫描处理!");
 					}else{
@@ -118,35 +122,42 @@ public class ReplyService implements IReplyService {
 						replyMessage.setOperation("subscribe");
 					}
 				}else if(MessageType.EVENT_TYPE_UNSUBSCRIBE.equals(baseMessage.getEvent().toUpperCase())){//取消订阅事件
+					logger.info("取消订阅事件");
 					replyMessage.setContent("不要离开我~~~~(>_<)~~~~ ");
 					replyMessage.setOperation("unsubscribe");
 				}else if(MessageType.EVENT_TYPE_SCAN.equals(baseMessage.getEvent().toUpperCase())){//用户已关注时扫描二维码事件
+					logger.info("用户已关注时扫描二维码事件");
 					replyMessage.setContent("您已关注!");
 					replyMessage.setOperation("event-qr-scan");
 				}else if(MessageType.EVENT_TYPE_LOCATION.equals(baseMessage.getEvent().toUpperCase())){//用户上传地理位置事件
+					logger.info("用户上传地理位置事件");
 					logger.info("获取用户地理位置: lat : " + baseMessage.getLatitude());
 					logger.info("获取用户地理位置: lng : " + baseMessage.getLongitude());
 					logger.info("获取用户地理位置: precision : "
 							+ baseMessage.getPrecision());
 					replyMessage.setOperation("event-location");
 				}else{
+					logger.info("无对应消息类型");
 					replyMessage.setContent(DEFAULT_REPLY_MESSAGE);
 					replyMessage.setOperation("NO EVENT CAPTURE");
 				}
 			}else if(MessageType.MESSAGE_TYPE_LOCATION.equals(baseMessage.getMsgType())){//用户地理位置消息
-				
+				logger.info("用户地理位置消息");
 			}else if(MessageType.MESSAGE_TYPE_VOICE.equals(baseMessage.getMsgType())){//语言消息
+				logger.info("语言消息");
 				
 			}else if(MessageType.MESSAGE_TYPE_IMAGE.equals(baseMessage.getMsgType())){//图片消息
+				logger.info("图片消息");
 				
 			}else if(MessageType.MESSAGE_TYPE_LINK.equals(baseMessage.getMsgType())){
+				logger.info("链接消息");
 				
 			}else{
 				replyMessage.setContent(DEFAULT_REPLY_MESSAGE);
 				replyMessage.setOperation("NO-TEXT-ANSWER");
 			}
+			return replyMessage;
 		}
-		return null;
 	}
 	/**
 	 * 解析从微信过来的xml 为对象

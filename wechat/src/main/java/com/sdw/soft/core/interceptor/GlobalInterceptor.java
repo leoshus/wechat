@@ -55,7 +55,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		logger.info("--------------------postHandle--------------");
+//		logger.info("--------------------postHandle--------------");
 		super.postHandle(request, response, handler, modelAndView);
 	}
 	
@@ -63,7 +63,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter{
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		logger.info("--------------------afterCompletion----------");
+//		logger.info("--------------------afterCompletion----------");
 		super.afterCompletion(request, response, handler, ex);
 	}
 	

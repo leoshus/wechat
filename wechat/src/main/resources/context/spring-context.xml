@@ -25,7 +25,7 @@
 	</context:component-scan>
 	
 	<bean id="wechatConfig" class="com.sdw.soft.common.config.WechatConfig">
-		<property name="weixinId" value="syd3600520"/>
+		<property name="weixinId" value="gh_4f3143843422"/>
 		<property name="appId" value=""/>
 		<property name="appSecret" value=""/>
 		<property name="token" value="sydlovemic"/>
