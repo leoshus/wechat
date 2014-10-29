@@ -23,7 +23,7 @@ public class ReplyTest {
 	
 	@Test
 	public void test01(){
-		String tmp = ReplyService.dealReceiveMessage(null);
-		System.out.println("tmp:"+tmp);
+		String requestXml =  "<xml><ToUserName><![CDATA[gh_4f3143843422]]></ToUserName><FromUserName><![CDATA[of2Yrt8f2LvQ8bhBttLDg4A045NI]]></FromUserName><CreateTime>1414512271</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[世界新技术]]></Content><MsgId>6075283943937494502</MsgId></xml>";
+		ReplyService.dealReceiveMessage(requestXml);
 	}
 }

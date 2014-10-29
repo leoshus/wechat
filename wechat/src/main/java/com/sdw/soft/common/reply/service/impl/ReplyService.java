@@ -44,7 +44,6 @@ public class ReplyService implements IReplyService {
 	 */
 	public String dealReceiveMessage(String requestXml){
 		String msgType = null;
-		requestXml = "<xml><ToUserName><![CDATA[gh_4f3143843422]]></ToUserName><FromUserName><![CDATA[of2Yrt8f2LvQ8bhBttLDg4A045NI]]></FromUserName><CreateTime>1414512271</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[世界新技术]]></Content><MsgId>6075283943937494502</MsgId></xml>";
 		WechatBaseMessage baseMessage = this.fectchWechatMessage(requestXml, new Class[]{WechatBaseMessage.class});
 		msgType = baseMessage.getMsgType();
 		String responseMessage = "响应消息";
