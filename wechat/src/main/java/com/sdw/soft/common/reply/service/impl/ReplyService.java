@@ -2,6 +2,7 @@ package com.sdw.soft.common.reply.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import com.sdw.soft.common.reply.vo.WechatMusicMessage;
 import com.sdw.soft.common.reply.vo.WechatTextMessage;
 import com.sdw.soft.common.service.ICommonService;
 import com.sdw.soft.common.vo.WechatUser;
+import com.sdw.soft.core.utils.FreemarkerUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
@@ -137,7 +139,10 @@ public class ReplyService implements IReplyService {
 						WechatUser wechatUser = new WechatUser();
 						wechatUser.setOpenId(baseMessage.getFromUserName());
 						commonService.saveWechatUser(wechatUser);
-						replyMessage.setContent("欢迎关注 syd的公共账号!");
+						resultMap = new HashMap<String,String>();
+//						resultMap.put("username", "");
+//						replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
+						replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
 						replyMessage.setOperation("subscribe");
 					}
 				}else if(MessageType.EVENT_TYPE_UNSUBSCRIBE.equals(baseMessage.getEvent().toUpperCase())){//取消订阅事件
@@ -183,8 +188,19 @@ public class ReplyService implements IReplyService {
 				replyMessage.setOperation("link_message");
 				
 			}else{
+				String command = baseMessage.getContent().trim();
 				replyMessage.setContent(DEFAULT_REPLY_MESSAGE);
-				replyMessage.setOperation("NO-TEXT-ANSWER");
+				if("1".equals(command)){
+					replyMessage.setContent("他很懒 美食查询 还未完成 敬请期待!");
+				}else if("2".equals(command)){
+					replyMessage.setContent("他很懒 公交路线 还未完成 敬请期待!");
+				}else if("3".equals(command)){
+					replyMessage.setContent("<a href='http://weibo.com/1853131443'>Sonicery_D</a>  soft engineer 一枚!");
+				}
+				replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
+//				replyMessage.setOperation("NO-TEXT-ANSWER");
+//				resultMap.put("username", "");
+//				replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
 			}
 			return replyMessage;
 		}

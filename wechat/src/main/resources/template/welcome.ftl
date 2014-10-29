@@ -1,1 +1,1 @@
-欢迎${username},关注syd的微信公共账号!\n\n
+欢迎${username},关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可
