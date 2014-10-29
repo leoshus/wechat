@@ -16,6 +16,8 @@ import com.sdw.soft.common.reply.vo.WechatArticleMessage;
 import com.sdw.soft.common.reply.vo.WechatBaseMessage;
 import com.sdw.soft.common.reply.vo.WechatMusicMessage;
 import com.sdw.soft.common.reply.vo.WechatTextMessage;
+import com.sdw.soft.common.service.ICommonService;
+import com.sdw.soft.common.vo.WechatUser;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
@@ -39,6 +41,10 @@ public class ReplyService implements IReplyService {
 	
 	@Autowired
 	private WechatConfig wechatConfig;
+	
+	@Autowired
+	private ICommonService commonService;
+	
 	/* (non-Javadoc)
 	 * @see com.sdw.soft.common.reply.service.impl.IReplyService#dealReceiveMessage(java.lang.String)
 	 */
@@ -56,14 +62,24 @@ public class ReplyService implements IReplyService {
 				
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_IMAGE)){//图片消息
 				logger.info("dealReceiveMessage---图片消息");
+				Object message = assembleReplyMessage(baseMessage,REPLY_MESSAGE_TYPE_TEXT);
+				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,message,new Class[]{WechatTextMessage.class});
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_LOCATION)){//地理位置消息
+				Object message = assembleReplyMessage(baseMessage,REPLY_MESSAGE_TYPE_TEXT);
+				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,message,new Class[]{WechatTextMessage.class});
 				logger.info("dealReceiveMessage---地理位置消息");
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_EVENT)){//事件消息
 				logger.info("dealReceiveMessage---事件消息");
+				Object message = assembleReplyMessage(baseMessage,REPLY_MESSAGE_TYPE_TEXT);
+				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,message,new Class[]{WechatTextMessage.class});
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_LINK)){//链接消息
 				logger.info("dealReceiveMessage---链接消息");
+				Object message = assembleReplyMessage(baseMessage,REPLY_MESSAGE_TYPE_TEXT);
+				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,message,new Class[]{WechatTextMessage.class});
 			}else if(msgType.equals(MessageType.MESSAGE_TYPE_VOICE)){//语言消息
 				logger.info("dealReceiveMessage---语言消息");
+				Object message = assembleReplyMessage(baseMessage,REPLY_MESSAGE_TYPE_TEXT);
+				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,message,new Class[]{WechatTextMessage.class});
 			}
 		}
 		logger.info("responseMessage finally:{}",responseMessage);
@@ -109,6 +125,7 @@ public class ReplyService implements IReplyService {
 			replyMessage.setDatime((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
 			
 			Map<String,String> resultMap = null;
+			
 			if(MessageType.MESSAGE_TYPE_EVENT.equals(baseMessage.getMsgType())){//事件处理
 				if(MessageType.EVENT_TYPE_CLICK.equals(baseMessage.getEvent().toUpperCase())){//click事件
 					logger.info("click事件");
@@ -117,6 +134,9 @@ public class ReplyService implements IReplyService {
 					if(baseMessage.getEventKey() != null && !baseMessage.getEventKey().equals("")){//二维码扫描
 						logger.info("二维码扫描处理!");
 					}else{
+						WechatUser wechatUser = new WechatUser();
+						wechatUser.setOpenId(baseMessage.getFromUserName());
+						commonService.saveWechatUser(wechatUser);
 						replyMessage.setContent("欢迎关注 syd的公共账号!");
 						replyMessage.setOperation("subscribe");
 					}
@@ -142,14 +162,25 @@ public class ReplyService implements IReplyService {
 				}
 			}else if(MessageType.MESSAGE_TYPE_LOCATION.equals(baseMessage.getMsgType())){//用户地理位置消息
 				logger.info("用户地理位置消息");
+				logger.info("用户上传地理位置事件");
+				logger.info("获取用户地理位置: location-X : " + baseMessage.getLocationX());
+				logger.info("获取用户地理位置: location-Y : " + baseMessage.getLocationY());
+				replyMessage.setContent("您当前的位置为："+baseMessage.getLabel()+",location-X:"+baseMessage.getLocationX()+",location-Y:"+baseMessage.getLocationY());
+				replyMessage.setOperation("event-location");
 			}else if(MessageType.MESSAGE_TYPE_VOICE.equals(baseMessage.getMsgType())){//语言消息
 				logger.info("语言消息");
+				replyMessage.setContent("语言消息 尚未处理 敬请期待！");
+				replyMessage.setOperation("voice_message");
 				
 			}else if(MessageType.MESSAGE_TYPE_IMAGE.equals(baseMessage.getMsgType())){//图片消息
 				logger.info("图片消息");
+				replyMessage.setContent("图片消息 尚未处理 敬请期待！");
+				replyMessage.setOperation("image_message");
 				
 			}else if(MessageType.MESSAGE_TYPE_LINK.equals(baseMessage.getMsgType())){
 				logger.info("链接消息");
+				replyMessage.setContent("链接消息 尚未处理 敬请期待！");
+				replyMessage.setOperation("link_message");
 				
 			}else{
 				replyMessage.setContent(DEFAULT_REPLY_MESSAGE);

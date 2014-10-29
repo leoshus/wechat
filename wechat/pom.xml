@@ -25,6 +25,7 @@
 		<jackson.version>2.2.1</jackson.version>
 		<xstream.version>1.4.3</xstream.version>
 		<freemarker.version>[2.3.19,2.4)</freemarker.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -282,6 +283,11 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>${commons-fileupload.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
 		</dependency>
 		<!-- jackson json -->
 		<dependency>
