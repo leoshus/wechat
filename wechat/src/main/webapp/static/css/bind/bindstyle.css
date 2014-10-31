@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+/********index_1************/
+.flex-center {/*display: flex;justify-content: center;*/position: relative;box-shadow: 0px 1px 1px #d0d0d0;}
+.flex-center .item{width: 50%;text-align: center;height:39px;line-height: 39px;float: left;font-size: 15px;}
+#bs{position:absolute;left:0%;bottom:0px;width: 50%;height: 4px;background-color: #ff4400;}
+
+.content{background-color: #f5f5f5;margin-top: -7px;}
+.content-b{padding: 0 10px;font-size: 12px;padding-bottom: 10px;}
+.content-b-a{margin-top: 10px;}
+.content-b-a tr{margin-bottom: 5px;}
+.content-b-a td{width:50%;padding-bottom:10px;}
+.content-b-a .td-r{text-align: right;}
+.content-b-a .td-r span{text-align: left;}
+.content-b-a td span{display:inline-block;width:55px;height:15px;background-color:#e5e5e5;border-radius:75.8px;padding-left: 11px;}
+
+.content-b-b {border: solid #b8b8b8 1px;border-radius: 10px;margin-top: 10px;font-size:10px;}
+.content-b-b td, .content-b-b th {border-left: 1px solid #cdcdcd;border-top: 1px solid #cdcdcd;padding: 3.5px 0px 3.5px 10px;text-align: left;background-color: #fff;}
+.content-b-b .content-b-b-a th {background-color: #e3e3e3;border-top: none;}
+.content-b-b td:first-child, .content-b-b th:first-child {border-left: none;}
+.content-b-b th:first-child {border-radius: 10px 0 0 0;}
+.content-b-b th:last-child {border-radius: 0 10px 0 0;}
+.content-b-b .content-b-b-e td{border-top: 0;}
+
+.content-b-c {border: solid #b8b8b8 1px;border-radius: 10px;font-size:10px;text-align: center;}
+.content-b-c td, .content-b-c th {border-left: 1px solid #cdcdcd;border-top: 1px solid #cdcdcd;padding: 3px 0px;background-color: #fff;}
+.content-b-c th {text-align:center;background-color: #e3e3e3;border-top: none;}
+.content-b-c td:first-child, .content-b-c th:first-child {border-left: none;}
+.content-b-c th:first-child {border-radius: 10px 0 0 0;}
+.content-b-c th:last-child {border-radius: 0 10px 0 0;}
+.content-b-c .content-b-b-e td{border-top: 0;}
+
+.content-b-d{margin-bottom: 20px;margin-top: 10px;}
+.content-b-e{margin-bottom: 20px;}
+
+.arrow-up {max-width:0px;height:0px;border-left:5px solid transparent; border-right:5px solid transparent;border-bottom:5px solid #ff4400;margin-left: 50%;margin-top: -5px;}
+#cpjs{background: url("../../images/ahome/bg.png") no-repeat top right;background-size: 1px 15px;background-position: 100% 12px;}
+.footer-b{position: fixed;left: 0;bottom: 0;width: 100%;height: 45px;line-height: 50px;background-color: #ff4400;color: #fff;text-align: center;font-size: 20px;}
+.footer-b a{color: #fff;}
+.footer-b a img{vertical-align: middle;width: 18.5px;height: 18.5px;margin-top: -6px;}
+
+/********************input_1***********************/
+
+.ui-mobile .ui-page-theme-a{background: none repeat scroll 0% 0% #e5e5e5;}
+/*******header********/
+.nav {height: 50px;margin-top: 16px;}
+.nav .item{display:inline-block;width:33.3%;height: 50px;text-align: center;float: left;}
+.line{margin-top:25px;border-top: 1px dashed #cecece;}
+.top-txt{margin-top:-24px;font-size: 12px;color: #999999;}
+.cir{width:15px;height:15px;background:#cecece;margin:0px auto;border-radius: 78.5px 78.5px 78.5px 78.5px;}
+.nav .item .line-b{margin-top:25px;border-top: 1px solid #7fceb1;}
+.nav .item .top-txt-b{margin-top:-24px;font-size: 12px;color: #7fceb1;}
+.nav .item .cir-b{width:15px;height:15px;background:#7fceb1;margin:0px auto;border-radius: 78.5px 78.5px 78.5px 78.5px;}
+.nav .item .bottom-txt{font-size: 9px;color: #666666;margin-top: 5px;}
+
+/*input1   content*/
+.ls2 {letter-spacing:2em;}
+.ls3 {letter-spacing:.5em;}
+.input1-div{border: 1px solid #c1c1c1;border-radius:5px;padding: 10px;background-color: #f5f5f5;}
+.input1-div .verify-btn{display:block;width:80px;height:42px;font-size: 15px;line-height: 42px;border: 2px solid #81ccb0;font-weight:normal;background: 0;float: right;margin-top: -56px;text-align:center;}
+.next-btn {display:block;width:100%;height:50px;background-color:#ff4400;text-align:center;font-weight:normal;font-size:20px;line-height:55px;border-radius:5px;margin-top: 10px;text-shadow: none;}
+/*footer*/
+.ui-page .footer-a{text-align: center;font-size: .6em;color:#666666;padding-bottom: .5em;padding-top:10px;}
+/*header和footer更改背景颜色和去掉边框，content更改背景颜色。*/
+.ui-page .ui-content{background: none repeat scroll 0% 0% #e5e5e5;padding: 10px;}
+.ui-page .ui-bar-inherit{background: none repeat scroll 0% 0% #e5e5e5;text-shadow:none;border: 0;font-weight: normal;}
+
+/*input2   content*/
+.input2-div{border: 1px solid #c1c1c1;border-radius:5px;background-color: #f5f5f5;}
+.input2-div .verify-btn{display:block;width:50px;font-size: 10px;line-height: 15px;border-radius:5px;border: 1px solid #1a7c65;background: 0;height: 30px;float: right;margin-top: -35px;text-align:center;box-shadow: 1px 1px 3px #000;}
+.input2-div h4{font-size: 14px;font-weight: normal;margin:0px;line-height: 29px;margin-top:-10px;color:#999999;}
+
+.bbr-cont-group{}
+/*.bbr-cont-group .bbr-container:first-child{border-top-right-radius: inherit;border-top-left-radius: inherit;}*/
+/*.bbr-cont-group .bbr-container:last-child{border-bottom-right-radius: inherit;border-bottom-left-radius: inherit;}*/
+.bbr-container {background-color:#f5f5f5;border-radius: 5px;border: 1px solid #c1c1c1;margin-bottom: 5px;}
+.bbr-container .bbr-title{position: relative;display:block;line-height: 45px;padding-left: 10px;background-color:#f5f5f5;border-radius:5px;color:#999999;}
+.bbr-container .bbr-content{display: none;padding:10px 10px 0 10px;background-color: #f5f5f5;border-radius: 0 0 5px 5px;border-top: 1px solid #c1c1c1;}
+.unfold-btn{position:absolute;top:12.5px;right:40px;display:inline-block;width:20px;height:20px;background:url("../../../static/images/ahome/bt_ok.png") no-repeat top left;background-size: 20px 20px;}
+.delete-btn{position:absolute;top:12.5px;right:10px;display:inline-block;width:20px;height:20px;background:url("../../../static/images/ahome/bt_off.png") no-repeat top left;background-size: 20px 20px;}
+.bt{border-top: 1px dashed #cecece;}
+
+
+
+
+
+    /*****output-1****/
+.output1-div{border: 1px solid #c1c1c1;border-radius:5px;padding:10px 10px 10px 20px;background-color: #f5f5f5;}
+.btn-group div{width: 50%;float: left;}
+.output1-div p{line-height: 35px;color:#666666;}
+.cancel-btn,.h-submit{display:block;width:142px;height:50px;background-color:#ff4400;text-align:center;font-weight:normal;font-size:20px;line-height:55px;border-radius:5px;margin-top: 10px;}
+

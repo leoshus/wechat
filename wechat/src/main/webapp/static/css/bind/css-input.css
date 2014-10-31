@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS Document */
+.add-requisite{color: #ec9300;font-size: 22px;margin-top: -25px;float: right;line-height: 1em;}
+.add-requisite:after{content: "*";}
+/*input*/
+.input-div{margin-bottom: 10px;border: 1px solid #b8b8b8;height: 41px;padding-top: 3px;background-color: #fff;}
+.input-div:after{display: block;clear: both;visibility: hidden;content:"";}
+.input-div label{width: 100px;height: auto;line-height:2.2em;float: left;margin-bottom: 0;margin-left: 17px;}
+.input-div div{position: relative;box-shadow:  none;border: 0;}
+.info-content .v >div{margin: 0px 0px 0px 117px;}
+.info-content .v{margin-right: 90px;}
+
+.input-div .ui-input-text{margin: 0px 0px 0px 117px;border: 0px none;border-radius: 0px;}
+.input-div .ui-body-inherit{background-color: #fff;}
+.input-div .ui-shadow-inset{box-shadow:none;}
+/*select*/
+.select-div{border: 1px solid #b8b8b8;margin-bottom: 10px;height: 42px;padding-top: 2px;background-color: #fff;}
+.select-div:after{display: block;clear: both;height: 0;visibility: hidden;content:"";}
+.select-div label{width: 100px;height: auto;line-height:2.4em;float: left;margin-bottom:0;margin-left: 17px;}
+.select-div div{margin-right: 0px;margin-top: 0;margin-bottom: 0;line-height: 1em;box-shadow:none;border:0;}
+.select-div span{font-weight: normal;text-align: left;margin-left: -8px;}
+
+.select-div .ui-btn{background-color:#fff;text-shadow:none;border-radius:0;}
+.select-div .ui-select
+.select-div .ui-body-inherit{background-color: #fff;}
+.select-div .ui-select .ui-shadow-inset{box-shadow:none;}
+
+.select-div .ui-select .ui-focus{box-shadow: none;}
+.select-div .ui-select .ui-btn-active{background-color:#f5f5f5;color: #323333;text-shadow: none;}
+
+/*radio*/
+.radio_div{width: 95%;margin: 0px auto;}
+.radio_div .ui-controlgroup{margin: 0em 0px 0.5em;}
+.radio_div .ui-controlgroup-label{margin-top:0.5em;width: 93px;height: 30px;margin-top: 0.5em;float: left;}
+
+/***radio*/
+.h-radio_div{width:135px;float: left;margin: -5px 0 -5px -8px;}
+.h-radio_div .ui-radio .ui-btn{background-color:#f5f5f5;border: 0;font-size: 14px;font-weight: normal;color: #999999;padding-top: 15px;}
+.h-radio_div .ui-radio .ui-btn-icon-left:after{border-radius: 5px;}
+.h-radio_div .ui-radio .ui-radio-on:after{background-image:url('/tkylpro/static/css/themes/default/images/icons-png/gou.png');background-size: 13.5px 12.5px;width: 20px;height: 20px;border: 1px solid #aaaaaa;background-color: #f5f5f5;}
+.h-radio_div .ui-radio .ui-radio-off:after{width:20px;height: 20px;border: 1px solid #aaaaaa;background-color: #f5f5f5;opacity:1;}
+
+/*****checkbox   fuck****/
+.bxsm-div{position: relative;margin: -5px 0}
+.bxsm-div a{display: block;position:absolute;z-index:100;left:180px;top:0px;font-size: 14px;width:100px;height: 48px;line-height: 48px;font-weight: normal;}
+.bxsm-div .ui-checkbox{border-radius:0;border:0;}
+.bxsm-div .ui-checkbox label{border-radius:0;border:0;padding-top:15px;background-color:#f5f5f5;font-size: 14px;color: #cecece;font-weight: normal;}
+.bxsm-div .ui-checkbox .ui-btn{background-color:#f5f5f5;background-size: 25px 25px;}
+.bxsm-div .ui-checkbox .ui-btn-icon-left:after{background-color: #f5f5f5;border:1px solid #aaaaaa;border-radius: 5px;}
+.bxsm-div .ui-checkbox .ui-checkbox-off:after{opacity: 1;width: 20px;height: 20px;}
+html .ui-btn.ui-checkbox-on.ui-checkbox-on:after{background-image:url('/tkylpro/static/css/themes/default/images/icons-png/gou.png');background-size: 13.5px 12.5px;width: 20px;height: 20px;}
+/*.radio_div .ui-controlgroup-controls{margin-left: 93px;}*/
+/*textarea*/
+.textarea_div{width: 95%;margin: 0px auto;}
+
+/*#zyms_div .select-div{margin-bottom: 10px;}*/
+/*#zyms_div .select-div .ui-select div{height: 13px;line-height: 13px;}*/
+/*#zyms_div .select-div .ui-select div span{height: 20px;line-height: 20px;}*/
