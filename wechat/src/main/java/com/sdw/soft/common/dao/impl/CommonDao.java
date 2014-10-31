@@ -1,12 +1,10 @@
 package com.sdw.soft.common.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.sdw.soft.common.dao.ICommonDao;
 import com.sdw.soft.common.vo.WechatUser;
+import com.sdw.soft.core.dao.AncestorDao;
 import com.sdw.soft.core.utils.DateUtils;
 import com.sdw.soft.core.utils.IdGenerator;
 
@@ -17,11 +15,8 @@ import com.sdw.soft.core.utils.IdGenerator;
  * @description  公共Dao
  */
 @Repository
-public class CommonDao implements ICommonDao{
+public class CommonDao extends AncestorDao implements ICommonDao{
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
 	/* (non-Javadoc)
 	 * @see com.sdw.soft.common.dao.impl.ICommonDao#saveWechatUser(com.sdw.soft.common.vo.WechatUser)
 	 */

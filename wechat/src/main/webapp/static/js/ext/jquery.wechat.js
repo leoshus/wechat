@@ -157,10 +157,10 @@ $.wechat={
 				  $name = $this.attr("name");
 				  $value = $this.val();
 				  arrays[$name]=$value;
+				  console.log("name:"+$name+",value="+$value);
 			  });
-			  arrays['tbrName']='Tom';
-			  arrays['yzm']='1234';
-			  console.log("combineForm:"+arrays);
+			  arrays["openId"]="123";
+			  console.log("combineForm:"+JSON.stringify(arrays));
 			  return arrays;
 		  }
 };

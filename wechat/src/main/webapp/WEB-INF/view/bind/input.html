@@ -49,19 +49,27 @@
         	];
         	$.validateInit(condition,form);
 			$("#nextbtn").click(function(){
-				
-				//----for test ---strat---
-				//$.tkylTest.wechatUserForm();
-				//---for test ----end----
 				if(!$.validateForm(form)){
 					return;
 				}else{
-					//校验验证码输入是否正确
-					if($.tkylMessage.checkVerifyCode()){
-						return;
-					}
+		        	showLoadingb();
+		        	var infos = $.wechat.combineForm(form);
+					$.post("/wechat/bind/create.json",infos,function(data){
+						if(data != null && data != ""){
+							if(data.success == "true" || data.success == true){
+								window.location.href="/wechat/bind/success";								
+							}else{
+								alert(data.message);
+							}
+						}else{
+							window.location.href="/wechat/error/error";
+						}
+						hideLoading();
+					}).error(function(){
+						alert("服务暂时不可用,请稍后再试!");
+						hideLoading();
+					});
 		        	$.sessionStorage.setData(form);
-					window.location.href="/wechat/view/bind/success.html";
 				}
 				
 			});        	
@@ -76,7 +84,7 @@
             });
 			 
           //初始化，时间控件
-	        $.wechat.showTime($("#policyBirth"),'optDate',100);//'optDate');
+	        $.wechat.showTime($("#wechatBirth"),'optDate',100);//'optDate');
         });
     </script>
 </head>
@@ -108,16 +116,16 @@
                     <input id="wechatCardNo" name="wechatCardNo" type="text" />
                 </div>
                 <div id="noIDCardDiv" style="display:none;">
-                    <div class="select-div" id="policySexDiv">
-                        <label for="policySex">投保人性别：</label>
-                        <select id="policySex" name = "policySex">
+                    <div class="select-div" id="wechatSexDiv">
+                        <label for="wechatSex">投保人性别：</label>
+                        <select id="wechatSex" name = "wechatSex">
                             <option value="0">男</option>
                             <option value="1">女</option>
                         </select>
                     </div>
-                    <div class="input-div" id="csrq_div" id="policyBirthDiv">
-                        <label for="policyBirth">出生日期：</label>
-                        <input id="policyBirth" name="policyBirth" type="text"/>
+                    <div class="input-div" id="csrq_div" id="wechatBirthDiv">
+                        <label for="wechatBirth">出生日期：</label>
+                        <input id="wechatBirth" name="wechatBirth" type="text"/>
                     </div>
                 </div>
                 <div class="input-div" id="sjhm_div">
@@ -131,7 +139,7 @@
                 <a href="javascript:$.tkylMessage.getVerifyCode();" class="verify-btn" style="color:#81ccb0;">获取验证码</a>-->
             </div>
             <div id="errorInfomessage" style="text-align:center;width:100%;color:#ff0000;"></div>
-            <a id="nextbtn" href="javascript:void(0);" data-ajax="false" class="next-btn" style="color:#ffffff;">下一步</a>
+            <a id="nextbtn" href="javascript:void(0);" data-ajax="false" class="next-btn" style="color:#ffffff;">绑定</a>
         </div>
         <div data-role="footer" class="footer-a">
             Sonicery_D&nbsp;版权所有<br/>Copyright Sonicery_D.All Rights Reserved.
