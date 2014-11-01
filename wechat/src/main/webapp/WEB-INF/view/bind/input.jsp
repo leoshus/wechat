@@ -1,41 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../common/taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
-
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
     <meta content="telephone=no" name="format-detection" />
     <title>用户绑定</title>
     <!--jquery mobile-->
-    <link rel="stylesheet" href="${base}/static/css/jquerymobile/jquery.mobile-1.4.0.min.css"/>
-    <script type="text/javascript" src="${base}/static/js/jquery/jquery-1.10.2.min.js"></script>
-    <script src="${base}/static/js/jquerymobile/jquery.mobile-1.4.0.js"></script>
+    <link rel="stylesheet" href="${ctx}/static/css/jquerymobile/jquery.mobile-1.4.0.min.css"/>
+    <script type="text/javascript" src="${ctx}/static/js/jquery/jquery-1.10.2.min.js"></script>
+    <script src="${ctx}/static/js/jquerymobile/jquery.mobile-1.4.0.js"></script>
     <!--重置页面样式-->
-    <link rel="stylesheet" href="${base}/static/css/main.css"/>
+    <link rel="stylesheet" href="${ctx}/static/css/main.css"/>
     <!--输入页样式表  请加到jquery-mobile.css文件下面-->
-    <link rel="stylesheet" href="${base}/static/css/bind/css-input.css"/>
-    <link rel="stylesheet" href="${base}/static/css/bind/bindstyle.css"/>
+    <link rel="stylesheet" href="${ctx}/static/css/bind/css-input.css"/>
+    <link rel="stylesheet" href="${ctx}/static/css/bind/bindstyle.css"/>
 
     <!--表单验证控件-->
-   <link type="text/css" rel="stylesheet" href="${base}/static/css/form/validationEngine.jquery.css"/>
-   <script type="text/javascript" src="${base}/static/js/form/jquery.validationEngine.js"></script>
-   <script type="text/javascript" src="${base}/static/js/form/languages/jquery.validationEngine-zh_CN.js"></script>
+   <link type="text/css" rel="stylesheet" href="${ctx}/static/css/form/validationEngine.jquery.css"/>
+   <script type="text/javascript" src="${ctx}/static/js/form/jquery.validationEngine.js"></script>
+   <script type="text/javascript" src="${ctx}/static/js/form/languages/jquery.validationEngine-zh_CN.js"></script>
 
     <!-- 日期相关js&css -->
-    <script src="${base}/static/js/mobiscroll/mobiscroll.core.js"></script>
-    <script src="${base}/static/js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>
-    <script src="${base}/static/js/mobiscroll/mobiscroll.datetime.js" type="text/javascript"></script>
-    <script src="${base}/static/js/mobiscroll/mobiscroll.scroller.android-ics.js" type="text/javascript"></script>
-    <script src="${base}/static/js/mobiscroll/mobiscroll.i18n.zh.js" type="text/javascript"></script>
-    <link href="${base}/static/css/mobiscroll/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
-    <link href="${base}/static/css/mobiscroll/mobiscroll.scroller.android-ics.css" rel="stylesheet" type="text/css" />
-    <link href="${base}/static/css/mobiscroll/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="${base}/static/js/ext/msgbox.js"></script>
-    <script type="text/javascript" src="${base}/static/js/ext/jquery.wechat.js"></script>
-    <script type="text/javascript" src="${base}/static/js/ext/loading.js"></script>
-    <script type="text/javascript" src="${base}/static/js/jquery/jquery.query.js"></script>
+    <script src="${ctx}/static/js/mobiscroll/mobiscroll.core.js"></script>
+    <script src="${ctx}/static/js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>
+    <script src="${ctx}/static/js/mobiscroll/mobiscroll.datetime.js" type="text/javascript"></script>
+    <script src="${ctx}/static/js/mobiscroll/mobiscroll.scroller.android-ics.js" type="text/javascript"></script>
+    <script src="${ctx}/static/js/mobiscroll/mobiscroll.i18n.zh.js" type="text/javascript"></script>
+    <link href="${ctx}/static/css/mobiscroll/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/static/css/mobiscroll/mobiscroll.scroller.android-ics.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/static/css/mobiscroll/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="${ctx}/static/js/ext/msgbox.js"></script>
+    <script type="text/javascript" src="${ctx}/static/js/ext/jquery.wechat.js"></script>
+    <script type="text/javascript" src="${ctx}/static/js/ext/loading.js"></script>
+    <script type="text/javascript" src="${ctx}/static/js/jquery/jquery.query.js"></script>
     <script>
     	var form = "wechatUser";
     	var openId = "";
@@ -57,16 +55,17 @@
 					return;
 				}else{
 		        	showLoadingb();
+		        	return;
 		        	var infos = $.wechat.combineForm(form);
-					$.post("${base}/bind/create.json",infos,function(data){
+					$.post("${ctx}/bind/create.json",infos,function(data){
 						if(data != null && data != ""){
 							if(data.success == "true" || data.success == true){
-								window.location.href="${base}/bind/success";								
+								window.location.href="${ctx}/bind/success";								
 							}else{
 								alert(data.message);
 							}
 						}else{
-							window.location.href="${base}/error/error";
+							window.location.href="${ctx}/error/error";
 						}
 						hideLoading();
 					}).error(function(){

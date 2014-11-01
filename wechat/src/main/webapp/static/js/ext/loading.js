@@ -1,6 +1,3 @@
-/**
- * Created by tianguiliang on 2014/8/11.
- */
 $(function(){
     //设置0.5的透明。
     //filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;
@@ -26,7 +23,7 @@ $(function(){
 
     var l_img=document.createElement("img");
     l_img.id="l_img";
-    l_img.src="/wechat/static/images/loading.gif";
+    l_img.src="../static/images/loading.gif";
     l_img.style.position="absolute";
     l_img.style.left="0px";
     l_img.style.top="0px";

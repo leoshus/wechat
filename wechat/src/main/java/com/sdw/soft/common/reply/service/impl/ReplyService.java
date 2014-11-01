@@ -74,6 +74,7 @@ public class ReplyService implements IReplyService {
 			}else{//当前用户尚未绑定
 				Map<String,String> bindMap = new HashMap<String,String>();
 				bindMap.put("url", "http://sydhappy.sinaapp.com/bind/user");
+				bindMap.put("openId", openId);
 				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,assembleTextMessage(baseMessage,FreemarkerUtils.data2Template(bindMap, "bind.ftl")),new Class[]{WechatTextMessage.class});
 			}
 		}

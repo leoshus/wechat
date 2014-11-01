@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.sdw.soft.core.vo.Constants;
+
 /**
  * @author Sonicery_D
  * @date 2014年10月28日
@@ -22,7 +24,10 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		
+		//为javascript获取context path 提供便利
+		if(request.getAttribute(Constants.CONTEXT_PATH) == null){
+			request.setAttribute(Constants.CONTEXT_PATH, request.getContextPath());
+		}
 		request.setCharacterEncoding(CHARSET);
 		response.setCharacterEncoding(CHARSET);
 		response.setContentType("text/html;charset=UTF-8");
