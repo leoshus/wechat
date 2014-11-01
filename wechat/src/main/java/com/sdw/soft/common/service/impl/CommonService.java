@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.sdw.soft.common.dao.ICommonDao;
 import com.sdw.soft.common.service.ICommonService;
-import com.sdw.soft.common.vo.WechatUser;
+import com.sdw.soft.common.vo.WechatUserSample;
 
 /**
  * @author Sonicery_D
@@ -23,7 +23,7 @@ public class CommonService implements ICommonService {
 	 * @see com.sdw.soft.common.service.impl.ICommonService#saveWechatUser(com.sdw.soft.common.vo.WechatUser)
 	 */
 	@Override
-	public boolean saveWechatUser(WechatUser wechatUser){
+	public boolean saveWechatUser(WechatUserSample wechatUser){
 		return commonDao.saveWechatUser(wechatUser);
 	}
 }

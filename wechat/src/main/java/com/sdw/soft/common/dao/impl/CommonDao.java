@@ -3,7 +3,7 @@ package com.sdw.soft.common.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.sdw.soft.common.dao.ICommonDao;
-import com.sdw.soft.common.vo.WechatUser;
+import com.sdw.soft.common.vo.WechatUserSample;
 import com.sdw.soft.core.dao.AncestorDao;
 import com.sdw.soft.core.utils.DateUtils;
 import com.sdw.soft.core.utils.IdGenerator;
@@ -21,7 +21,7 @@ public class CommonDao extends AncestorDao implements ICommonDao{
 	 * @see com.sdw.soft.common.dao.impl.ICommonDao#saveWechatUser(com.sdw.soft.common.vo.WechatUser)
 	 */
 	@Override
-	public boolean saveWechatUser(WechatUser wechatUser){
+	public boolean saveWechatUser(WechatUserSample wechatUser){
 		boolean flag = false;
 		int count = this.jdbcTemplate.update("insert into wechat_user (user_id,openid,createtime) values(?,?,?)",
 				new Object[]{IdGenerator.generatorId(),wechatUser.getOpenId(),DateUtils.getCurrentTimeString()});

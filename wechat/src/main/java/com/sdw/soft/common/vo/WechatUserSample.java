@@ -5,7 +5,7 @@ package com.sdw.soft.common.vo;
  * @version 1.0.0
  * @description 关注用户信息
  */
-public class WechatUser {
+public class WechatUserSample {
 
 	private String userId;
 	

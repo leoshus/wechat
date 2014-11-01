@@ -159,7 +159,7 @@ $.wechat={
 				  arrays[$name]=$value;
 				  console.log("name:"+$name+",value="+$value);
 			  });
-			  arrays["openId"]="123";
+			  //arrays["openId"]="123";
 			  console.log("combineForm:"+JSON.stringify(arrays));
 			  return arrays;
 		  }

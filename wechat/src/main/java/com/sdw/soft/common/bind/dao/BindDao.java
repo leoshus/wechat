@@ -2,6 +2,7 @@ package com.sdw.soft.common.bind.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class BindDao extends AncestorDao implements IBindDao{
 	public WechatUser fetchBindUser(String openId) {
 		WechatUser user = null;
 		try {
-			user = this.jdbcTemplate.queryForObject(FETCH_BIND_USER_BY_OPENDID, new RowMapper<WechatUser>(){
+			List<WechatUser> users = this.jdbcTemplate.query(FETCH_BIND_USER_BY_OPENDID, new RowMapper<WechatUser>(){
 
 				@Override
 				public WechatUser mapRow(ResultSet rs, int rowNum)
@@ -68,6 +69,9 @@ public class BindDao extends AncestorDao implements IBindDao{
 				}
 				
 			},openId);
+			if(users.size()>0){
+				user = users.get(0);
+			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			logger.info(e.getMessage(),e);

@@ -1,11 +1,10 @@
-package com.sdw.soft.common.bind.service;
+package com.sdw.soft.common.bind.service.impl;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sdw.soft.common.bind.dao.impl.IBindDao;
-import com.sdw.soft.common.bind.service.impl.IBindService;
+import com.sdw.soft.common.bind.service.IBindService;
 import com.sdw.soft.common.bind.vo.WechatUser;
 import com.sdw.soft.core.utils.DateUtils;
 import com.sdw.soft.core.utils.IdGenerator;

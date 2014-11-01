@@ -1,6 +1,6 @@
 package com.sdw.soft.common.dao;
 
-import com.sdw.soft.common.vo.WechatUser;
+import com.sdw.soft.common.vo.WechatUserSample;
 
 /**
  * @author Sonicery_D
@@ -15,6 +15,6 @@ public interface ICommonDao {
 	 * @param wechatUser
 	 * @return
 	 */
-	public abstract boolean saveWechatUser(WechatUser wechatUser);
+	public abstract boolean saveWechatUser(WechatUserSample wechatUser);
 
 }

@@ -1,4 +1,4 @@
-package com.sdw.soft.common.bind.service.impl;
+package com.sdw.soft.common.bind.service;
 
 import com.sdw.soft.common.bind.vo.WechatUser;
 

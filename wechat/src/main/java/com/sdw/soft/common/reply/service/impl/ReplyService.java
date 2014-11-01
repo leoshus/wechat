@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sdw.soft.common.bind.service.IBindService;
 import com.sdw.soft.common.config.WechatConfig;
 import com.sdw.soft.common.reply.service.IReplyService;
 import com.sdw.soft.common.reply.vo.MessageType;
@@ -18,7 +20,7 @@ import com.sdw.soft.common.reply.vo.WechatBaseMessage;
 import com.sdw.soft.common.reply.vo.WechatMusicMessage;
 import com.sdw.soft.common.reply.vo.WechatTextMessage;
 import com.sdw.soft.common.service.ICommonService;
-import com.sdw.soft.common.vo.WechatUser;
+import com.sdw.soft.common.vo.WechatUserSample;
 import com.sdw.soft.core.utils.FreemarkerUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -41,11 +43,16 @@ public class ReplyService implements IReplyService {
 
 	private static final String DEFAULT_REPLY_MESSAGE = "抱歉，自动回复功能尚未开通 感谢您的关注！";
 	
+	private static final String DEFAULT_REPLY_ERROR = "系统异常,请稍后再试!";
+	
 	@Autowired
 	private WechatConfig wechatConfig;
 	
 	@Autowired
 	private ICommonService commonService;
+	
+	@Autowired
+	private IBindService bindService;
 	
 	/* (non-Javadoc)
 	 * @see com.sdw.soft.common.reply.service.impl.IReplyService#dealReceiveMessage(java.lang.String)
@@ -56,6 +63,33 @@ public class ReplyService implements IReplyService {
 		msgType = baseMessage.getMsgType();
 		String responseMessage = "响应消息";
 		logger.info("当前微信请求数据类型为:{}",msgType);
+		String openId = baseMessage.getFromUserName();
+		if(StringUtils.isBlank(openId)){//未获取到openid
+			responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,assembleTextMessage(baseMessage,DEFAULT_REPLY_ERROR),new Class[]{WechatTextMessage.class});
+		}else{
+			logger.info("当前请求用户的OpenId为:{}",openId);
+			com.sdw.soft.common.bind.vo.WechatUser bindUser = bindService.fetchBindUser(openId);
+			if(bindUser != null){//当前用户已经绑定
+				responseMessage = replyMessage(msgType, baseMessage, responseMessage);
+			}else{//当前用户尚未绑定
+				Map<String,String> bindMap = new HashMap<String,String>();
+				bindMap.put("url", "http://sydhappy.sinaapp.com/bind/user");
+				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,assembleTextMessage(baseMessage,FreemarkerUtils.data2Template(bindMap, "bind.ftl")),new Class[]{WechatTextMessage.class});
+			}
+		}
+		logger.info("responseMessage finally:{}",responseMessage);
+		return responseMessage;
+	}
+	
+	/**
+	 * 根据请求的报文 作出响应
+	 * @param msgType
+	 * @param baseMessage
+	 * @param responseMessage
+	 * @return
+	 */
+	private String replyMessage(String msgType, WechatBaseMessage baseMessage,
+			String responseMessage) {
 		if(msgType != null){
 			if(msgType.equals(MessageType.MESSAGE_TYPE_TEXT)){//处理文本消息
 				logger.info("dealReceiveMessage---处理文本消息");
@@ -84,7 +118,6 @@ public class ReplyService implements IReplyService {
 				responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,message,new Class[]{WechatTextMessage.class});
 			}
 		}
-		logger.info("responseMessage finally:{}",responseMessage);
 		return responseMessage;
 	}
 	private String processReplyMessage(String replyMessageType,Object message,Class[] clazz) {
@@ -136,12 +169,12 @@ public class ReplyService implements IReplyService {
 					if(baseMessage.getEventKey() != null && !baseMessage.getEventKey().equals("")){//二维码扫描
 						logger.info("二维码扫描处理!");
 					}else{
-						WechatUser wechatUser = new WechatUser();
+						WechatUserSample wechatUser = new WechatUserSample();
 						wechatUser.setOpenId(baseMessage.getFromUserName());
 						commonService.saveWechatUser(wechatUser);
 						resultMap = new HashMap<String,String>();
-//						resultMap.put("username", "");
-//						replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
+						resultMap.put("username", "");
+						replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
 						replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
 						replyMessage.setOperation("subscribe");
 					}
@@ -197,10 +230,10 @@ public class ReplyService implements IReplyService {
 				}else if("3".equals(command)){
 					replyMessage.setContent("<a href='http://weibo.com/1853131443'>Sonicery_D</a>  soft engineer 一枚!");
 				}
-				replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
-//				replyMessage.setOperation("NO-TEXT-ANSWER");
+//				replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
 //				resultMap.put("username", "");
-//				replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
+				replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
+				replyMessage.setOperation("NO-TEXT-ANSWER");
 			}
 			return replyMessage;
 		}
@@ -216,5 +249,19 @@ public class ReplyService implements IReplyService {
 		xstream.autodetectAnnotations(true);
 		xstream.processAnnotations(clazz);
 		return (WechatBaseMessage)xstream.fromXML(xml);
+	}
+	/**
+	 * 拼装文本消息通用方法
+	 * @return
+	 */
+	private WechatTextMessage assembleTextMessage(WechatBaseMessage baseMessage,String content) {
+		WechatTextMessage replyMessage = new WechatTextMessage();
+		replyMessage.setFuncFlag("1");//位0x0001被标志时，星标刚收到的消息。
+		replyMessage.setCreateTime(new Long(new Date().getTime()).toString());
+		replyMessage.setToUserName(baseMessage.getFromUserName());
+		replyMessage.setFromUserName(wechatConfig.getWeixinId());
+		replyMessage.setDatime((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
+		replyMessage.setContent(content);
+		return replyMessage;
 	}
 }

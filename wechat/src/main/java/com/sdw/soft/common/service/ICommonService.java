@@ -1,6 +1,6 @@
 package com.sdw.soft.common.service;
 
-import com.sdw.soft.common.vo.WechatUser;
+import com.sdw.soft.common.vo.WechatUserSample;
 
 /**
  * @author Sonicery_D
@@ -10,6 +10,6 @@ import com.sdw.soft.common.vo.WechatUser;
  */
 public interface ICommonService {
 
-	public abstract boolean saveWechatUser(WechatUser wechatUser);
+	public abstract boolean saveWechatUser(WechatUserSample wechatUser);
 
 }
