@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sdw.soft.common.bind.service.IBindService;
+import com.sdw.soft.common.bind.vo.WechatUser;
 import com.sdw.soft.common.config.WechatConfig;
 import com.sdw.soft.common.reply.service.IReplyService;
 import com.sdw.soft.common.reply.vo.MessageType;
@@ -68,7 +69,7 @@ public class ReplyService implements IReplyService {
 			responseMessage = processReplyMessage(REPLY_MESSAGE_TYPE_TEXT,assembleTextMessage(baseMessage,DEFAULT_REPLY_ERROR),new Class[]{WechatTextMessage.class});
 		}else{
 			logger.info("当前请求用户的OpenId为:{}",openId);
-			com.sdw.soft.common.bind.vo.WechatUser bindUser = bindService.fetchBindUser(openId);
+			WechatUser bindUser = bindService.fetchBindUser(openId);
 			if(bindUser != null){//当前用户已经绑定
 				responseMessage = replyMessage(msgType, baseMessage, responseMessage);
 			}else{//当前用户尚未绑定
@@ -230,10 +231,12 @@ public class ReplyService implements IReplyService {
 					replyMessage.setContent("他很懒 公交路线 还未完成 敬请期待!");
 				}else if("3".equals(command)){
 					replyMessage.setContent("<a href='http://weibo.com/1853131443'>Sonicery_D</a>  soft engineer 一枚!");
+				}else{
+					replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
 				}
 //				replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
 //				resultMap.put("username", "");
-				replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
+				
 				replyMessage.setOperation("NO-TEXT-ANSWER");
 			}
 			return replyMessage;

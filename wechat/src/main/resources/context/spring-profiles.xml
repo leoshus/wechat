@@ -23,4 +23,18 @@
 			<property name="dataSource" ref="dataSource"/>
 		</bean>
 	</beans> 
+	<beans profile="test">
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="${jdbc.driver}"/>
+			<property name="url" value="${jdbc.test.url}"/>
+			<property name="username" value="${jdbc.test.username}"/>
+			<property name="password" value="${jdbc.test.password}"/>
+			<property name="maxActive" value="${jdbc.pool.maxActive}"/>
+			<property name="maxIdle" value="${jdbc.pool.maxIdle}"/>
+			<property name="maxWait" value="${jdbc.pool.maxWait}"/>
+		</bean>		
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource" ref="dataSource"/>
+		</bean>
+	</beans> 
 </beans>
