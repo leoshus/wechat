@@ -1,5 +1,6 @@
 package com.sdw.soft.common.reply.service.impl;
 
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,8 +25,12 @@ import com.sdw.soft.common.service.ICommonService;
 import com.sdw.soft.common.vo.WechatUserSample;
 import com.sdw.soft.core.utils.FreemarkerUtils;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.QuickWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 /**
  * @author Sonicery_D
  * @date 2014年10月28日
@@ -122,9 +127,38 @@ public class ReplyService implements IReplyService {
 		}
 		return responseMessage;
 	}
+	/**
+	 * 将发生内容转回为XML
+	 * @param replyMessageType
+	 * @param message
+	 * @param clazz
+	 * @return
+	 */
 	private String processReplyMessage(String replyMessageType,Object message,Class[] clazz) {
 		XStream xstream = new XStream(new DomDriver("UTF-8",
-				new XmlFriendlyNameCoder("-_", "_")));
+				new XmlFriendlyNameCoder("-_", "_")){
+			@Override
+			public HierarchicalStreamWriter createWriter(Writer out) {
+				return new PrettyPrintWriter(out){
+					//对所有xml节点的转换都增加CDATA标识
+					boolean cdata = true;
+					@Override
+					public void startNode(String name, Class clazz) {
+						super.startNode(name, clazz);
+					}
+					@Override
+					protected void writeText(QuickWriter writer, String text) {
+						if(cdata){
+							writer.write("<![CDATA[");
+							writer.write(text);
+							writer.write("]]>");
+						}else{
+							writer.write(text);
+						}
+					}
+				};
+			}
+		});
 		xstream.autodetectAnnotations(true);
 		xstream.processAnnotations(clazz);
 		if(REPLY_MESSAGE_TYPE_MUSIC.equals(replyMessageType)){//音乐消息
