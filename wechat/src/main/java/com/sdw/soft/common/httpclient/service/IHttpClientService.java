@@ -17,5 +17,13 @@ public interface IHttpClientService {
 	 */
 	public abstract String sendGETRequest(String uri, boolean proxyFlag)
 			throws Exception;
+	/**
+	 * 发送POST请求
+	 * @param uri 请求uri
+	 * @param data 请求数据
+	 * @param proxyFlag 是否使用代理
+	 * @return
+	 */
+	public abstract String sendPOSTRequest(String uri,String data,boolean proxyFlag) throws Exception;
 
 }
