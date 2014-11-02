@@ -26,7 +26,7 @@
 		<xstream.version>1.4.3</xstream.version>
 		<freemarker.version>[2.3.19,2.4)</freemarker.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<httpclient.version>4.3.2</httpclient.version>
+		<httpclient.version>4.2.5</httpclient.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 

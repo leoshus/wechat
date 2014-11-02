@@ -18,3 +18,11 @@ create table wechat_bind_user(
 	createDate varchar(20) default null,
 	updateDate varchar(20) default null
 )default charset=utf8;
+
+drop table if exists wechat_access_token;
+create table wechat_access_token(
+	id varchar(40) not null primary key,
+	service_provider varchar(20) not null,
+	token varchar(30) not null,
+	create_time varchar(20) default null
+)default charset=utf8;
