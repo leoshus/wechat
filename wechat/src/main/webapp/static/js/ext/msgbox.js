@@ -67,7 +67,7 @@ window.alert = function(txt,obj)
  * @param ok_f 确定回调函数
  * @param close_f 取消的回调函数
  * */
-window.alert1 = function(txt,obj,ok_f,close_f)
+window.alert_c = function(txt,obj,ok_f,close_f)
 {
     var strshield=document.getElementById("shield");
     var stralertFram=document.getElementById("alertFram");
@@ -108,14 +108,10 @@ window.alert1 = function(txt,obj,ok_f,close_f)
     strHtml += " <li style=\"background:#ffffff;text-align:left;font-size:14px;font-weight:bold;height:25px;line-height:25px;border-bottom:3px solid #f98743;color: #f98743;padding: 5px 0px 5px 20px;border-radius: 5px 5px 0px 0px;\">系统提示</li>\n";
     strHtml += " <li style=\"background:#ffffff;text-align:left;font-size:14px;height:120px;line-height:20px;height: auto;\"><div style=\"padding:20px\">"+txt+"</div></li>\n";
     if(close_f!=null){
-//        strHtml += " <li style=\"background:#ffffff;text-align:center;font-weight:bold;height:30px;line-height:30px; border-top:1px solid #cccccc;color: #f98743;border-radius: 0px 0px 5px 5px;\">\n" +
-//            "<input type='button' value='确定' onclick=\"doOk()\" style='width: 50%;text-align: center;border:0;border-radius:0;border-right: 1px solid #cccccc;color: #f98743;'/>"+
-//            "<input type='button' value='取消' onclick=\"doClose()\" style='width: 50%;text-align: center;color: #f98743;'/>"+
-//            " </li>\n";
         strHtml += " <li style=\"background:#ffffff;font-weight:bold;height:40px;text-align: left;line-height:40px; border-top:1px solid #cccccc;color: #f98743;border-radius: 0px 0px 5px 5px;\">\n" +
-            "<span onclick=\"doOk()\" style='display: inline-block;text-align: center;width: 49%;border-right: 1px solid #cccccc;color: #f98743;font-size:16px;'/>"+"确定"+"</span>"+
-            "<span onclick=\"doClose()\" style='display: inline-block;width: 50%;text-align: center;color: #f98743;font-size:16px;'/>"+"取消"+"</span>"+
-            " </li>\n";
+                        "<span onclick=\"doOk()\" style='display: inline-block;text-align: center;width: 49%;border-right: 1px solid #cccccc;color: #f98743;font-size:16px;'/>"+"确定"+"</span>"+
+                        "<span onclick=\"doClose()\" style='display: inline-block;width: 50%;text-align: center;color: #f98743;font-size:16px;'/>"+"取消"+"</span>"+
+                    " </li>\n";
     }else if(ok_f!=null){
         strHtml += " <li style=\"background:#ffffff;text-align:center;font-weight:bold;height:40px;line-height:40px; border-top:1px solid #cccccc;padding: 0px 0px;color: #f98743;border-radius: 0px 0px 5px 5px;font-size: 16px;\" onclick=\"doOk()\">确 定</li>\n";
     }

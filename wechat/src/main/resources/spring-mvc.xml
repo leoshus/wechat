@@ -92,6 +92,8 @@
 	</bean>
 	<!-- 对静态资源文件的访问,将无法mapping到Controller的path交给default servlet handler处理 -->
 	<mvc:default-servlet-handler/>
+	<!-- 配置js,css等静态文件直接映射到对应的文件夹 不会被DispatcherServlet拦截 -->
+    <mvc:resources location="/static/**" mapping="/WEB-INF/static/**"></mvc:resources>
 	<!-- 定义无Controller的path <->view 直接映射 -->
 	<mvc:view-controller path="/" view-name="redirect:${web.pages.index}"/>
 	<!-- 拦截器配置 -->
