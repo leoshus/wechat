@@ -25,7 +25,7 @@
 								<a href="javascript:void(0);" id="wemap"><span>微地图</span></a>
 							</dd>
 							<dd>
-								<a href="javascript:void(0);"><span>微社区</span></a>
+								<a href="javascript:void(0);" id="weupload"><span>微上传</span></a>
 							</dd>
 							<dd>
 								<a href="javascript:void(0);"><span>微投票</span></a>
@@ -67,6 +67,9 @@
 							return ;
 						}else if("wemap" == $id){
 							window.location.href="${ctx}/netmall/weapp/wemap";
+							return;
+						}else if("weupload" == $id){
+							window.location.href="${ctx}/netmall/weapp/upload";
 							return;
 						}else{
 							if(!$this.attr("class")){
