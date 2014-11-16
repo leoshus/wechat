@@ -186,6 +186,14 @@ public class DateUtils {
       Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       return formatter.format(now);
     }
+    
+    public static String getCurrentDateString(){
+		String dateStr;
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddhhmmss");
+		//当前时间
+		dateStr = format.format(System.currentTimeMillis()) ;
+		return dateStr;
+	}
 
     public static String formatDate(Date date)
     {

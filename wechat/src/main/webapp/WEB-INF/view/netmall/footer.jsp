@@ -30,9 +30,6 @@
 							<dd>
 								<a href="javascript:void(0);"><span>微投票</span></a>
 							</dd>
-							<dd>
-								<a href="javascript:void(0);"><span>微调研</span></a>
-							</dd>
 						</dl></li>
 					<li><a href="javascript:void(0);" class=""><span>会员专区</span></a>
 						<dl>
@@ -70,6 +67,11 @@
 							return ;
 						}else if("wemap" == $id){
 							window.location.href="${ctx}/netmall/weapp/wemap";
+							return;
+						}else{
+							if(!$this.attr("class")){
+								alert("即将上线,敬请期待!");
+							}
 							return;
 						}
 					});

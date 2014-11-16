@@ -30,7 +30,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
-import com.thoughtworks.xstream.io.xml.XppDriver;
 /**
  * @author Sonicery_D
  * @date 2014年10月28日
@@ -195,7 +194,7 @@ public class ReplyService implements IReplyService {
 			replyMessage.setFromUserName(wechatConfig.getWeixinId());
 			replyMessage.setDatime((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
 			
-			Map<String,String> resultMap = null;
+			Map<String,String> resultMap = new HashMap<String,String>();
 			
 			if(MessageType.MESSAGE_TYPE_EVENT.equals(baseMessage.getMsgType())){//事件处理
 				if(MessageType.EVENT_TYPE_CLICK.equals(baseMessage.getEvent().toUpperCase())){//click事件
@@ -209,9 +208,9 @@ public class ReplyService implements IReplyService {
 						wechatUser.setOpenId(baseMessage.getFromUserName());
 						commonService.saveWechatUser(wechatUser);
 						resultMap = new HashMap<String,String>();
-						resultMap.put("username", "");
+						
+						resultMap.put("url", "http://sydhappy.sinaapp.com/netmall/index");
 						replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
-						replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
 						replyMessage.setOperation("subscribe");
 					}
 				}else if(MessageType.EVENT_TYPE_UNSUBSCRIBE.equals(baseMessage.getEvent().toUpperCase())){//取消订阅事件
@@ -259,15 +258,17 @@ public class ReplyService implements IReplyService {
 			}else{
 				String command = baseMessage.getContent().trim();
 				replyMessage.setContent(DEFAULT_REPLY_MESSAGE);
-				if("1".equals(command)){
+				/*if("1".equals(command)){
 					replyMessage.setContent("他很懒 美食查询 还未完成 敬请期待!");
 				}else if("2".equals(command)){
 					replyMessage.setContent("他很懒 公交路线 还未完成 敬请期待!");
 				}else if("3".equals(command)){
 					replyMessage.setContent("<a href='http://weibo.com/1853131443'>Sonicery_D</a>  soft engineer 一枚!");
 				}else{
-					replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
-				}
+					
+				}*/
+				resultMap.put("url", "http://sydhappy.sinaapp.com/netmall/index");
+				replyMessage.setContent(FreemarkerUtils.data2Template(resultMap, "welcome.ftl"));
 //				replyMessage.setOperation("欢迎您,关注syd的微信公共账号!\n\n1.美食查询\n2.公交路线\n3.关于Sonicery_D\n回复数字即可");
 //				resultMap.put("username", "");
 				

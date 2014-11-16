@@ -115,9 +115,9 @@
 	    <!-- slider -->
 	   <div class = 'slider'>
 	       <!-- slides -->
-	       <div class='slide'><img src="${ctx }/static/images/netmall/1.jpg" width="100%" height="100%;"></div>
-	        <div class='slide'><img src="${ctx }/static/images/netmall/2.jpg" width="100%" height="100%;"></div>
-	        <div class='slide'><img src="${ctx }/static/images/netmall/3.jpg" width="100%" height="100%;"></div>
+	       <div class='slide'><img src="${ctx }/static/images/netmall/1.png" width="100%" height="100%;"></div>
+	        <div class='slide'><img src="${ctx }/static/images/netmall/2.png" width="100%" height="100%;"></div>
+	        <div class='slide'><img src="${ctx }/static/images/netmall/3.png" width="100%" height="100%;"></div>
 	    </div>
 	</div>
 	<div class='menuContainer'>
