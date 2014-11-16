@@ -34,7 +34,7 @@
 					<li><a href="javascript:void(0);" class=""><span>会员专区</span></a>
 						<dl>
 							<dd>
-								<a href="javascript:void(0);"><span>微商城</span></a>
+								<a href="javascript:void(0);" id="wemall"><span>微商城</span></a>
 							</dd>
 							<dd>
 								<a href="javascript:void(0);"><span>微餐饮</span></a>
@@ -70,6 +70,9 @@
 							return;
 						}else if("weupload" == $id){
 							window.location.href="${ctx}/netmall/weapp/upload";
+							return;
+						}else if("wemall" == $id){
+							window.location.href="${ctx}/netmall/weapp/wemall";
 							return;
 						}else{
 							if(!$this.attr("class")){
