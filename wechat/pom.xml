@@ -14,6 +14,7 @@
 		<spring.version>3.2.4.RELEASE</spring.version>
 		<springsecurity.version>3.1.4.RELEASE</springsecurity.version>
 		<spring-data-jpa.version>1.2.0.RELEASE</spring-data-jpa.version>
+		<mybatis.version>3.2.8</mybatis.version>
 		<mysql.version>5.1.28</mysql.version>
 		<ehcache.version>2.6.2</ehcache.version>
 		<slf4j.version>1.7.2</slf4j.version>
@@ -151,6 +152,17 @@
 			</exclusions>
 		</dependency>
 
+		<!-- myBatis -->
+		<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>1.2.1</version>
+			</dependency>
 		<!-- WEB begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
