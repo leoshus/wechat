@@ -34,4 +34,6 @@
 		<property name="baseOAuthUrl" value=""/>
 		<property name="baseOAuthTokenUrl" value=""/>
 	</bean>
+	<!-- 线程池执行器 包装工具 -->
+	<bean id="wechatExecutorWrapper" class="com.sdw.soft.core.utils.concurrency.WechatExecutorWrapper" scope="singleton"></bean>
 </beans>
