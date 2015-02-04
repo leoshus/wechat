@@ -11,7 +11,6 @@
 	<properties>
 		<junit.version>4.11</junit.version>
 		<spring.version>3.2.4.RELEASE</spring.version>
-		<spring.version>3.2.4.RELEASE</spring.version>
 		<springsecurity.version>3.1.4.RELEASE</springsecurity.version>
 		<spring-data-jpa.version>1.2.0.RELEASE</spring-data-jpa.version>
 		<mybatis.version>3.2.8</mybatis.version>
